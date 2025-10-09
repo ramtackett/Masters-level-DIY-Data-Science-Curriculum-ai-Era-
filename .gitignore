@@ -53,9 +53,13 @@ nosetests.xml
 # DATA & MODEL FILES (keep raw data elsewhere or use DVC)
 # ======================================================================
 
-# Raw and processed data
-data/
-!data/.gitkeep        # keep folder placeholder if desired
+# Ignore everything under /data by default
+data/**
+
+# Keep placeholder files to preserve structure
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
 
 # Models, checkpoints, artifacts
 models/
