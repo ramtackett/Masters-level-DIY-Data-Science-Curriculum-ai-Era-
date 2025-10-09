@@ -10,20 +10,23 @@ jobs:
     defaults:
       run:
         working-directory: ds-zero-to-one
+        shell: bash -l {0}         # 👈 ensure conda activation is visible to steps
     steps:
       - uses: actions/checkout@v4
 
-      # Use Miniforge (conda-forge bootstrap) with mamba
       - uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
           use-mamba: true
           auto-activate-base: false
+          conda-remove-defaults: true
           channels: conda-forge
           channel-priority: strict
-          conda-remove-defaults: true
           environment-file: ds-zero-to-one/environment.yml
           activate-environment: ds
 
       - name: Sanity check
-        run: python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
+        run: |
+          conda info
+          which python
+          python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
