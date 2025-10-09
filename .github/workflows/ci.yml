@@ -12,6 +12,7 @@ jobs:
         working-directory: ds-zero-to-one
     steps:
       - uses: actions/checkout@v4
+
       - uses: conda-incubator/setup-miniconda@v3
         with:
           auto-activate-base: false
@@ -20,5 +21,7 @@ jobs:
           channels: conda-forge
           channel-priority: strict
           use-mamba: true
+          conda-remove-defaults: true   # 👈 stop implicit 'defaults'
+
       - name: Sanity check
         run: python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
