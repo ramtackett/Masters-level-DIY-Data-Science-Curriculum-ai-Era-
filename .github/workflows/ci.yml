@@ -23,6 +23,7 @@ jobs:
           channel-priority: strict
           conda-remove-defaults: true
           environment-file: ds-zero-to-one/environment.yml
+          activate-environment: ds
 
       - name: Sanity check
         run: python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
