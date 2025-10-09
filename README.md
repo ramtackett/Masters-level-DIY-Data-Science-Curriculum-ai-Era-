@@ -1,2 +1,2 @@
-# Masters-level-DIY-Data-Science-Curriculum-ai-Era-
-chatgpt prompt: write me a masters level curriculum for data science in the age of artificial intelligence that will enable me to learn and have practicums for little to no cost. Build the foundational knowledge from the ground up until mastery, including skills that may become foundational in the age of collaborative chatbot workflow ...
+# ds-zero-to-one
+Starter repo for my DIY master’s curriculum (data science in the AI era).
