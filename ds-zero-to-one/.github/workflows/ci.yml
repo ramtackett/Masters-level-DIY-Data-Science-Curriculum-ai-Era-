@@ -1,0 +1,17 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: conda-incubator/setup-miniconda@v3
+        with:
+          auto-activate-base: false
+          activate-environment: ds
+          environment-file: environment.yml
+          channels: conda-forge, defaults
+          channel-priority: strict
+      - name: Sanity check
+        run: python -c "import pandas, duckdb; print('CI env OK')"
+

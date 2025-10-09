@@ -1,0 +1,16 @@
+# Data folders
+data/**
+!data/.gitkeep
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+
+# Jupyter checkpoints
+**/.ipynb_checkpoints
+
+# Python build and cache
+__pycache__/
+*.pyc
+
+# Env & virtualenvs
+.env
+.venv
