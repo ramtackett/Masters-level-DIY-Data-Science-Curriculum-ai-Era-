@@ -17,7 +17,8 @@ jobs:
           auto-activate-base: false
           activate-environment: ds
           environment-file: ds-zero-to-one/environment.yml
-          channels: conda-forge, defaults
+          channels: conda-forge
           channel-priority: strict
+          use-mamba: true
       - name: Sanity check
-        run: python -c "import pandas, duckdb; print('CI env OK')"
+        run: python -c "import pandas, duckdb, polars as pl; print('CI env OK')"

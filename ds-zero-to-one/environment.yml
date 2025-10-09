@@ -1,14 +1,17 @@
 name: ds
 channels:
-  - defaults
+  - conda-forge
+channel_priority: strict
 dependencies:
-  - plotly
+  - python=3.13.5
+  - numpy
   - pandas
   - matplotlib
   - scikit-learn
-  - python=3.13.5
-  - numpy
   - jupyterlab
+  - ipykernel
   - duckdb
-  - polars
-prefix: /home/rtackett/miniconda3/envs/ds
+  - plotly
+  - pip
+  - pip:
+      - polars
