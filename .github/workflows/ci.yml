@@ -13,15 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Use Miniforge (conda-forge bootstrap) with mamba
       - uses: conda-incubator/setup-miniconda@v3
         with:
+          miniforge-version: latest
+          use-mamba: true
           auto-activate-base: false
-          activate-environment: ds
-          environment-file: ds-zero-to-one/environment.yml
           channels: conda-forge
           channel-priority: strict
-          use-mamba: true
-          conda-remove-defaults: true   # 👈 stop implicit 'defaults'
+          conda-remove-defaults: true
+          environment-file: ds-zero-to-one/environment.yml
 
       - name: Sanity check
         run: python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
