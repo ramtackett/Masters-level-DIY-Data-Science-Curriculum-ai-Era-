@@ -12,21 +12,25 @@ jobs:
         working-directory: ds-zero-to-one
         shell: bash -l {0}         # 👈 ensure conda activation is visible to steps
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: conda-incubator/setup-miniconda@v3
+      # Miniforge (conda-forge first) + mamba solver
+      - name: Set up Miniconda (conda-forge, strict) 
+        uses: conda-incubator/setup-miniconda@v3
         with:
           miniforge-version: latest
           use-mamba: true
           auto-activate-base: false
-          conda-remove-defaults: true
-          channels: conda-forge
-          channel-priority: strict
+          conda-remove-defaults: true  # remove implicit 'defaults'
+          channels: conda-forge        # explicit default channel
+          channel-priority: strict     # strict priority (CI-side)
           environment-file: ds-zero-to-one/environment.yml
           activate-environment: ds
 
-      - name: Sanity check
+      - name: Sanity check imports 
         run: |
           conda info
           which python
-          python -c "import pandas, duckdb, polars as pl; print('CI env OK')"
+          python -c "import sys; print(sys.version)"
+          python -c "import numpy, pandas, seaborn, plotly, duckdb; import polars as pl; print('CI env OK')"

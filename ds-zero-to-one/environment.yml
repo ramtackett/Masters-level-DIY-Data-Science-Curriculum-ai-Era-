@@ -1,12 +1,12 @@
 name: ds
 channels:
   - conda-forge
-channel_priority: strict
 dependencies:
   - python=3.13.5
   - numpy
   - pandas
   - matplotlib
+  - seaborn
   - scikit-learn
   - jupyterlab
   - ipykernel
