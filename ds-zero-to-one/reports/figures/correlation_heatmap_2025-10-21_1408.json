@@ -1,0 +1,61 @@
+{
+  "created_at": "2025-10-21T14:08:43",
+  "image_file": "reports/figures/correlation_heatmap_2025-10-21_1408.png",
+  "chart_type": "heatmap",
+  "library": "seaborn",
+  "mapping": {
+    "x": null,
+    "y": null,
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_cleaned",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        244,
+        8
+      ],
+      "columns": [
+        "bill_total_usd",
+        "tip_usd",
+        "gender",
+        "is_smoker",
+        "day",
+        "time",
+        "party_size",
+        "tip_pct"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "tip_usd": "float64",
+        "gender": "object",
+        "is_smoker": "bool",
+        "day": "object",
+        "time": "object",
+        "party_size": "int64",
+        "tip_pct": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/03_Correlation_Regression_Storytelling.ipynb"
+  },
+  "vcs": {
+    "git_commit": "3600932f967d03465b005ae7db508e4ad719403a",
+    "git_branch": "main"
+  },
+  "notes": "Session 3: correlation matrix across numeric columns"
+}
