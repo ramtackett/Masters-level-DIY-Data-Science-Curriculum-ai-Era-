@@ -1,0 +1,53 @@
+{
+  "created_at": "2025-10-24T14:24:55",
+  "image_file": "reports/figures/residuals_vs_predicted_tips_HOMOSCEDASTIC_2025-10-24_1424.png",
+  "chart_type": "scatter",
+  "library": "matplotlib",
+  "mapping": {
+    "x": "predicted_tip",
+    "y": "residual",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_homoscedastic",
+    "dataset_path": "data/processed/tips_homoscedastic.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        220,
+        4
+      ],
+      "columns": [
+        "bill_total_usd",
+        "tip_usd",
+        "party_size",
+        "tip_pct"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "tip_usd": "float64",
+        "party_size": "int64",
+        "tip_pct": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/04B_Multiple_Regression_Model_Evaluation.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ec765f1602c865d7ee6a1f7254a2a1525f3631ff",
+    "git_branch": "main"
+  },
+  "notes": "Homoscedastic simulation residuals plot"
+}
