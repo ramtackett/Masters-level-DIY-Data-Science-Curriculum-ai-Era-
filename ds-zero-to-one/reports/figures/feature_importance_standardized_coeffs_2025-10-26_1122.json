@@ -1,0 +1,49 @@
+{
+  "created_at": "2025-10-26T11:22:47",
+  "image_file": "reports/figures/feature_importance_standardized_coeffs_2025-10-26_1122.png",
+  "chart_type": "barplot",
+  "library": "seaborn",
+  "mapping": {
+    "x": "StdCoef",
+    "y": "Feature",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_encoded_or_clean",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        4,
+        2
+      ],
+      "columns": [
+        "Feature",
+        "StdCoef"
+      ],
+      "dtypes": {
+        "Feature": "object",
+        "StdCoef": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05_Feature_Importance_and_Model_Refinement.ipynb"
+  },
+  "vcs": {
+    "git_commit": "a403d867cc283e1d24ccb2eb1f3590d614573c6f",
+    "git_branch": "main"
+  },
+  "notes": "Standardized coefficients (\u03b2*) with ELI5 overlay."
+}

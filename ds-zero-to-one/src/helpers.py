@@ -197,3 +197,34 @@ def save_and_log_plot(
         notes=notes,
     )
     return outpath, json_path
+
+import difflib
+from IPython.display import HTML, display
+
+def show_diff(cell_a: str, cell_b: str, name_a="Cell A", name_b="Cell B", color=True):
+    """
+    Display a unified diff and (optionally) a colorized HTML diff between two code cells.
+
+    Args:
+        cell_a (str): Code text of the first cell
+        cell_b (str): Code text of the second cell
+        name_a (str): Label for the first cell (default: "Cell A")
+        name_b (str): Label for the second cell (default: "Cell B")
+        color (bool): Whether to show a colorized HTML diff (default: True)
+    """
+    # --- Plain unified diff (git-style text) ---
+    diff = difflib.unified_diff(
+        cell_a.splitlines(),
+        cell_b.splitlines(),
+        fromfile=name_a,
+        tofile=name_b,
+        lineterm=""
+    )
+    print("".join(f"{line}\n" for line in diff))
+    
+    # --- Optional pretty HTML diff ---
+    if color:
+        diff_html = difflib.HtmlDiff().make_file(
+            cell_a.splitlines(), cell_b.splitlines(), fromdesc=name_a, todesc=name_b
+        )
+        display(HTML(diff_html))
