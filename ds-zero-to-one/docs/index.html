@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DS Study Sessions 1–5 • Self-Quiz</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:#111937; --ink:#e6ecff; --muted:#9fb3ff; --accent:#6ee7b7; --warn:#fca5a5; --info:#93c5fd;
+  }
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial}
+  .wrap{max-width:900px;margin:32px auto;padding:0 16px}
+  .card{background:var(--card);border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.35);padding:24px;margin-bottom:18px}
+  h1{font-size:clamp(20px,4vw,28px);margin:0 0 8px}
+  h2{font-size:20px;margin:16px 0 8px}
+  p.muted{color:var(--muted);margin-top:0}
+  .q{margin:18px 0;padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:12px}
+  .q h3{margin:0 0 8px;font-size:16px}
+  .q .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+  label{display:block;margin:6px 0;cursor:pointer}
+  input[type=radio],input[type=checkbox]{transform:translateY(1px)}
+  .btns{display:flex;gap:12px;flex-wrap:wrap;margin:12px 0}
+  button{
+    background:linear-gradient(135deg,#4158D0,#C850C0,#FFCC70);
+    background-size:200% 200%;
+    animation:grad 8s ease infinite;
+    border:none;color:white;padding:10px 14px;border-radius:12px;font-weight:600;cursor:pointer
+  }
+  button.secondary{background:#1e293b}
+  @keyframes grad{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .score{font-weight:800}
+  .good{color:var(--accent)} .warn{color:var(--warn)} .info{color:var(--info)}
+  .hidden{display:none}
+  .results .tag{display:inline-block;background:#1f2937;border-radius:999px;padding:4px 10px;margin:2px;font-size:12px}
+  .explain{color:var(--muted);margin:8px 0 0}
+  .divider{height:1px;background:rgba(255,255,255,.08);margin:16px 0}
+  /* Print layout: only print summary for a neat PDF */
+  @media print{
+    .no-print{display:none !important}
+    body{background:white;color:black}
+    .card{box-shadow:none;border:1px solid #ddd;background:white}
+    a:link,a:visited{color:#000}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="card">
+    <h1>Self-Quiz • Study Sessions 1–5</h1>
+    <p class="muted">Covers: environment/EDA basics, pandas ops, plotting, linear & multiple regression, R² & adjusted R², residual diagnostics (hist/Q–Q), heteroscedasticity, VIF, log transform, Breusch–Pagan.</p>
+    <div class="btns no-print">
+      <button onclick="startOver()">Reset</button>
+      <button class="secondary" onclick="scrollToQuiz()">Jump to Quiz</button>
+    </div>
+  </div>
+
+  <form id="quiz" class="card">
+    <h2>Quiz</h2>
+    <p class="muted">Select the best answer for each question. Explanations appear after submission.</p>
+
+    <!-- Questions (radio) -->
+    <div class="q" data-topic="EDA" data-explain="`df.describe(include='all')` summarizes numeric and non-numeric columns; `groupby` computes per-group metrics.">
+      <h3>1) What does <code>df.describe(include='all')</code> primarily provide?</h3>
+      <div class="meta">Topic: EDA basics</div>
+      <label><input type="radio" name="q1" value="A"> A) A scatter plot of all columns</label>
+      <label><input type="radio" name="q1" value="B" data-correct> B) Summary stats (count, mean, etc.) across columns</label>
+      <label><input type="radio" name="q1" value="C"> C) Drops missing rows</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="pandas" data-explain="Use <code>df.rename(columns={'old':'new'}, inplace=True)</code> or return a new df without inplace.">
+      <h3>2) How do you rename a column <code>old</code> to <code>new</code> in pandas?</h3>
+      <div class="meta">Topic: pandas rename</div>
+      <label><input type="radio" name="q2" value="A" data-correct> A) <code>df.rename(columns={'old':'new'}, inplace=True)</code></label>
+      <label><input type="radio" name="q2" value="B"> B) <code>df.columns['old']='new'</code></label>
+      <label><input type="radio" name="q2" value="C"> C) <code>df.rename('old','new')</code></label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="plotting" data-explain="Boxplots show the distribution and outliers per group; they are ideal for comparing tip % by category.">
+      <h3>3) Best plot to compare <em>tip_pct</em> across days and smoker status?</h3>
+      <div class="meta">Topic: visualization</div>
+      <label><input type="radio" name="q3" value="A" data-correct> A) Grouped boxplot</label>
+      <label><input type="radio" name="q3" value="B"> B) Pie chart</label>
+      <label><input type="radio" name="q3" value="C"> C) Line chart</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="regression" data-explain="In y = β0 + β1 x, slope β1≈0.10 means +$1 in bill predicts about +$0.10 tip on average.">
+      <h3>4) In a simple linear regression (tip_usd ~ bill_total_usd) with slope 0.10, what does that mean?</h3>
+      <div class="meta">Topic: regression basics</div>
+      <label><input type="radio" name="q4" value="A"> A) Every $1 of tip changes bill by $0.10</label>
+      <label><input type="radio" name="q4" value="B" data-correct> B) Every $1 higher bill predicts ≈ $0.10 higher tip</label>
+      <label><input type="radio" name="q4" value="C"> C) Intercept increases by 0.10</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="metrics" data-explain="Adjusted R² = 1 - (1-R²)*(n-1)/(n-p-1) penalizes extra features; use it to compare models with different p.">
+      <h3>5) Why use <em>Adjusted R²</em> instead of R² when adding features?</h3>
+      <div class="meta">Topic: model metrics</div>
+      <label><input type="radio" name="q5" value="A" data-correct> A) It penalizes unnecessary features</label>
+      <label><input type="radio" name="q5" value="B"> B) It always increases with more features</label>
+      <label><input type="radio" name="q5" value="C"> C) It equals RMSE</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="diagnostics" data-explain="Residuals vs predicted should look like a random cloud around 0; patterns/funnel shape signal issues.">
+      <h3>6) What should a healthy Residuals vs Predicted plot look like?</h3>
+      <div class="meta">Topic: diagnostics</div>
+      <label><input type="radio" name="q6" value="A" data-correct> A) Random cloud around the 0 line</label>
+      <label><input type="radio" name="q6" value="B"> B) A curve hugging the axis</label>
+      <label><input type="radio" name="q6" value="C"> C) A widening funnel</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="normality" data-explain="Use a histogram (+KDE) and a Q–Q plot; points near the diagonal indicate approximate normality.">
+      <h3>7) How do you visually assess residual normality?</h3>
+      <div class="meta">Topic: residual normality</div>
+      <label><input type="radio" name="q7" value="A"> A) Only RMSE</label>
+      <label><input type="radio" name="q7" value="B" data-correct> B) Histogram + Q–Q plot</label>
+      <label><input type="radio" name="q7" value="C"> C) Confusion matrix</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="heteroscedasticity" data-explain="Heteroscedasticity shows as residual spread changing with prediction size; consider log/Box–Cox or robust regression.">
+      <h3>8) Which is a common fix for heteroscedasticity?</h3>
+      <div class="meta">Topic: variance issues</div>
+      <label><input type="radio" name="q8" value="A" data-correct> A) Log transform of the target</label>
+      <label><input type="radio" name="q8" value="B"> B) Shuffle the rows</label>
+      <label><input type="radio" name="q8" value="C"> C) Add random noise to predictions</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="VIF" data-explain="VIF ≈ 1 is ideal; 5–10 watch; >10 suggests multicollinearity—drop/combine features.">
+      <h3>9) A VIF of 12 for one predictor likely means…</h3>
+      <div class="meta">Topic: VIF</div>
+      <label><input type="radio" name="q9" value="A"> A) Independence from other features</label>
+      <label><input type="radio" name="q9" value="B" data-correct> B) Strong multicollinearity</label>
+      <label><input type="radio" name="q9" value="C"> C) Perfect normality of residuals</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="BP" data-explain="Breusch–Pagan tests for non-constant error variance; higher p-value suggests constant variance.">
+      <h3>10) The Breusch–Pagan test primarily checks for…</h3>
+      <div class="meta">Topic: BP test</div>
+      <label><input type="radio" name="q10" value="A"> A) Autocorrelation</label>
+      <label><input type="radio" name="q10" value="B" data-correct> B) Heteroscedasticity</label>
+      <label><input type="radio" name="q10" value="C"> C) Nonlinear decision boundaries</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="encoding" data-explain="One-hot encode categoricals (e.g., gender → gender_Male), drop first to avoid dummy trap.">
+      <h3>11) How do you include <em>gender</em> and <em>is_smoker</em> in linear regression properly?</h3>
+      <div class="meta">Topic: encoding</div>
+      <label><input type="radio" name="q11" value="A"> A) Insert as raw strings</label>
+      <label><input type="radio" name="q11" value="B" data-correct> B) One-hot encode and drop one level</label>
+      <label><input type="radio" name="q11" value="C"> C) Replace with random numbers</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="q" data-topic="adjustedR2" data-explain="Adjusted R² can decrease if a new feature doesn’t help enough, discouraging overfitting.">
+      <h3>12) After adding a weak feature, Adjusted R² goes down. Why?</h3>
+      <div class="meta">Topic: adjusted R²</div>
+      <label><input type="radio" name="q12" value="A" data-correct> A) Penalty outweighed tiny R² gain</label>
+      <label><input type="radio" name="q12" value="B"> B) Bug in sklearn</label>
+      <label><input type="radio" name="q12" value="C"> C) Adjusted R² always increases</label>
+      <div class="explain hidden"></div>
+    </div>
+
+    <div class="btns no-print">
+      <button type="button" onclick="grade()">Submit & Review</button>
+      <button type="button" class="secondary" onclick="printSummary()">Generate PDF of Topics to Revisit</button>
+    </div>
+  </form>
+
+  <div id="results" class="card results hidden">
+    <h2>Results</h2>
+    <p class="muted">Score: <span id="score" class="score"></span></p>
+    <div id="revisit" class="hidden">
+      <h3>Topics to Revisit</h3>
+      <div id="topicChips"></div>
+    </div>
+    <div class="divider"></div>
+    <div id="details"></div>
+    <div class="btns no-print">
+      <button onclick="printSummary()">Save Summary as PDF</button>
+      <button class="secondary" onclick="startOver()">Try Again</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function scrollToQuiz(){document.getElementById('quiz').scrollIntoView({behavior:'smooth'})}
+function startOver(){document.querySelectorAll('input[type=radio]').forEach(i=>i.checked=false);
+  document.querySelectorAll('.explain').forEach(e=>{e.classList.add('hidden'); e.innerHTML=''});
+  document.getElementById('results').classList.add('hidden'); window.scrollTo({top:0,behavior:'smooth'});
+}
+function grade(){
+  const qs=[...document.querySelectorAll('.q')];
+  let correct=0, total=qs.length;
+  const topics={}
+  const details=[]
+  qs.forEach((q,idx)=>{
+    const name='q'+(idx+1);
+    const chosen=[...q.querySelectorAll('input[type=radio]')].find(i=>i.checked);
+    const right=[...q.querySelectorAll('input[data-correct]')][0];
+    const explain=q.dataset.explain || '';
+    const topic=q.dataset.topic || 'General';
+    let isCorrect=false;
+    if(chosen && right && chosen.value===right.value){ correct++; isCorrect=true; }
+    if(!isCorrect){ topics[topic]=(topics[topic]||0)+1; }
+    const ex=q.querySelector('.explain');
+    ex.innerHTML = (isCorrect? '✅ Correct.' : '❌ Incorrect.') + ' ' + explain;
+    ex.classList.remove('hidden');
+    details.push({n:idx+1,isCorrect,topic,explain});
+  });
+  // score
+  const sEl=document.getElementById('score');
+  sEl.textContent=`${correct}/${total} (${Math.round(100*correct/total)}%)`;
+  sEl.className='score ' + (correct/total>=0.8 ? 'good' : (correct/total>=0.6?'info':'warn'));
+  // topics to revisit
+  const res=document.getElementById('results'); res.classList.remove('hidden');
+  const revisit=document.getElementById('revisit'); const chips=document.getElementById('topicChips');
+  chips.innerHTML='';
+  const entries=Object.entries(topics).sort((a,b)=>b[1]-a[1]);
+  if(entries.length){
+    revisit.classList.remove('hidden');
+    entries.forEach(([t,count])=>{
+      const span=document.createElement('span');
+      span.className='tag';
+      span.textContent=`${t} • missed ${count}`;
+      chips.appendChild(span);
+    });
+  }else{
+    revisit.classList.remove('hidden');
+    chips.innerHTML='<span class="tag">No weak spots — great job!</span>';
+  }
+  // details list
+  const detailsDiv=document.getElementById('details');
+  detailsDiv.innerHTML = details.map(d=>(
+    `<div class="q"><strong>Q${d.n}</strong> — <em>${d.isCorrect?'Correct':'Incorrect'}</em>
+     <div class="meta">Topic: ${d.topic}</div>
+     <div class="explain">${d.explain}</div></div>`
+  )).join('');
+  res.scrollIntoView({behavior:'smooth'});
+}
+function printSummary(){
+  // For a clean PDF: ensure results are visible and explanations shown
+  const res=document.getElementById('results');
+  if(res.classList.contains('hidden')) grade();
+  window.print();
+}
+</script>
+</body>
+</html>
