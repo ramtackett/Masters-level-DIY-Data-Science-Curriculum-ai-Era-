@@ -1,0 +1,53 @@
+{
+  "created_at": "2025-10-28T05:01:52",
+  "image_file": "reports/figures/ols_vs_log_ols_residuals_side_by_side_2025-10-28_0501.png",
+  "chart_type": "residuals_compare",
+  "library": "matplotlib+seaborn",
+  "mapping": {
+    "x": "pred_tip_ols",
+    "y": "resid_ols",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_cleaned",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        244,
+        4
+      ],
+      "columns": [
+        "pred_tip_ols",
+        "resid_ols",
+        "pred_tip_log",
+        "resid_log"
+      ],
+      "dtypes": {
+        "pred_tip_ols": "float64",
+        "resid_ols": "float64",
+        "pred_tip_log": "float64",
+        "resid_log": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05_Heteroscedasticity_Fixes.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ca059f03b644d3837b5f8ede0329f34d02207315",
+    "git_branch": "main"
+  },
+  "notes": "Compare OLS vs log-OLS. Shapiro p (OLS)=0.0000, (Log-OLS)=0.9459."
+}

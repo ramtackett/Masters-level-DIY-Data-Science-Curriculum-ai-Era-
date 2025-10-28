@@ -1,0 +1,49 @@
+{
+  "created_at": "2025-10-27T16:24:00",
+  "image_file": "reports/figures/residuals_vs_predicted_tips_model_diagnostics_2025-10-27_1624.png",
+  "chart_type": "scatter",
+  "library": "seaborn",
+  "mapping": {
+    "x": "predicted_tip",
+    "y": "residuals",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_encoded_or_clean",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        49,
+        2
+      ],
+      "columns": [
+        "predicted_tip",
+        "residuals"
+      ],
+      "dtypes": {
+        "predicted_tip": "float64",
+        "residuals": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05_Feature_Importance_and_Model_Refinement.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ca059f03b644d3837b5f8ede0329f34d02207315",
+    "git_branch": "main"
+  },
+  "notes": "Residuals vs predicted with zero-reference line; check randomness & variance."
+}

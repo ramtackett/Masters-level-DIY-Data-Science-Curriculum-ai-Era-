@@ -1,0 +1,49 @@
+{
+  "created_at": "2025-10-27T13:26:05",
+  "image_file": "reports/figures/vif_bar_chart_2025-10-27_1326.png",
+  "chart_type": "barplot",
+  "library": "seaborn",
+  "mapping": {
+    "x": "VIF",
+    "y": "Feature",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_encoded_or_clean",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        2,
+        2
+      ],
+      "columns": [
+        "Feature",
+        "VIF"
+      ],
+      "dtypes": {
+        "Feature": "object",
+        "VIF": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05_Feature_Importance_and_Model_Refinement.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ca059f03b644d3837b5f8ede0329f34d02207315",
+    "git_branch": "main"
+  },
+  "notes": "VIF bar chart (const dropped). Threshold lines at 5 and 10."
+}

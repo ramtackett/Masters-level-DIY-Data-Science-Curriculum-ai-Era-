@@ -1,0 +1,49 @@
+{
+  "created_at": "2025-10-27T17:31:44",
+  "image_file": "reports/figures/residuals_normality_histogram_qqplot_2025-10-27_1731.png",
+  "chart_type": "diagnostic",
+  "library": "matplotlib+seaborn",
+  "mapping": {
+    "x": "predicted_tip",
+    "y": "residuals",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_encoded_or_clean",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        49,
+        2
+      ],
+      "columns": [
+        "residuals",
+        "predicted_tip"
+      ],
+      "dtypes": {
+        "residuals": "float64",
+        "predicted_tip": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05_Residual_Normality_And_Model_Diagnostics.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ca059f03b644d3837b5f8ede0329f34d02207315",
+    "git_branch": "main"
+  },
+  "notes": "Residual histogram + Q\u2013Q plot for checking normality assumption of linear regression residuals."
+}
