@@ -1,0 +1,61 @@
+{
+  "created_at": "2025-10-29T12:15:28",
+  "image_file": "reports/figures/Tip_Percentage_by_Day_and_Smoker_2025-10-29_1215.png",
+  "chart_type": "boxplot",
+  "library": "seaborn",
+  "mapping": {
+    "x": "day",
+    "y": "tip_pct",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_encoded_or_clean",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        244,
+        8
+      ],
+      "columns": [
+        "total_bill",
+        "tip",
+        "sex",
+        "smoker",
+        "day",
+        "time",
+        "size",
+        "tip_pct"
+      ],
+      "dtypes": {
+        "total_bill": "float64",
+        "tip": "float64",
+        "sex": "category",
+        "smoker": "category",
+        "day": "category",
+        "time": "category",
+        "size": "int64",
+        "tip_pct": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/05A_QUIZ1.ipynb"
+  },
+  "vcs": {
+    "git_commit": "abdd197fd28d2e0e8913b1cbcf6f420d1fbb6d00",
+    "git_branch": "main"
+  },
+  "notes": "Tip Percentage by Day and Smoker Status."
+}
