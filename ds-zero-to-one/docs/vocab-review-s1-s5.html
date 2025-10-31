@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Study Sessions 1–5 • Vocabulary Quiz (100 Qs)</title>
+<style>
+  :root{
+    --bg:#0f172a;--panel:#111827;--ink:#e5e7eb;--muted:#a1a1aa;
+    --accent:#38bdf8;--ok:#22c55e;--bad:#ef4444;--warn:#f59e0b;
+    --card:#0b1220;--shadow:0 10px 25px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(180deg,#0a0f1f, #0c1326 40%, #0b1120);
+       color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial}
+  header{padding:28px 16px 8px;text-align:center}
+  h1{margin:.1rem 0 0;font-size:clamp(1.4rem,2.5vw,1.8rem)}
+  .sub{color:var(--muted);font-size:.95rem}
+  main{max-width:1000px;margin:18px auto;padding:0 16px 80px}
+  .toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+  button,.btn{
+    background:linear-gradient(180deg,#0ea5e9,#0284c7);
+    border:none;color:white;padding:10px 14px;border-radius:10px;cursor:pointer;
+    box-shadow:var(--shadow);font-weight:600
+  }
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .secondary{background:linear-gradient(180deg,#334155,#1f2937)}
+  .ok{background:linear-gradient(180deg,#22c55e,#16a34a)}
+  .warn{background:linear-gradient(180deg,#f59e0b,#d97706)}
+  .bad{background:linear-gradient(180deg,#ef4444,#dc2626)}
+  .panel{
+    background:radial-gradient(1200px 700px at 100% -100%,#172554 5%, transparent 60%) , var(--panel);
+    border:1px solid #1f2937;border-radius:16px;padding:18px;box-shadow:var(--shadow)
+  }
+  .card{background:var(--card);border:1px solid #1f2937;border-radius:14px;padding:16px}
+  .q{display:grid;gap:10px}
+  .q:not(:last-child){margin-bottom:14px}
+  .q h3{margin:0 0 6px;font-size:1rem}
+  .opt{display:flex;gap:8px;align-items:flex-start;padding:10px;border:1px solid #232a3b;border-radius:10px}
+  .opt label{cursor:pointer;display:block}
+  .muted{color:var(--muted)}
+  .score{font-weight:800}
+  .tags{font-size:.82rem;color:var(--muted)}
+  .pill{display:inline-block;background:#0b1833;border:1px solid #1d3a6a;color:#cfe7ff;border-radius:999px;padding:2px 8px;margin:0 6px 0 0}
+  .grid{display:grid;gap:12px}
+  .grid.qs{grid-template-columns:1fr}
+  @media (min-width:860px){ .grid.qs{grid-template-columns:1fr 1fr} }
+  details{background:#0b1220;border:1px solid #1f2937;border-radius:10px;padding:10px}
+  details summary{cursor:pointer}
+  .footer{margin-top:24px;color:var(--muted);text-align:center}
+  .right{float:right}
+  .hidden{display:none}
+  .correct{outline:2px solid var(--ok)}
+  .incorrect{outline:2px solid var(--bad)}
+</style>
+</head>
+<body>
+  <header>
+    <h1>Vocabulary Quiz — Study Sessions 1–5 (100 Questions)</h1>
+    <p class="sub">Covers: data wrangling, EDA, visualization, regression, diagnostics (R²/Adjusted R², residuals, heteroscedasticity), VIF, dummy variables, evaluation, and more.</p>
+  </header>
+
+  <main>
+    <section class="panel">
+      <div class="toolbar">
+        <button id="btn-generate" class="btn">🔄 Generate 100 Questions</button>
+        <button id="btn-grade" class="btn ok" disabled>✅ Grade Quiz</button>
+        <button id="btn-review" class="btn warn" disabled>📝 Open Study Sheet (print to PDF)</button>
+        <button id="btn-clear" class="btn secondary">🧹 Clear Answers</button>
+      </div>
+
+      <div id="meta" class="card">
+        <div><span class="pill">Randomized</span><span class="pill">Multiple-choice</span><span class="pill">Self-grading</span></div>
+        <p class="muted">Tip: after grading, click <b>“Open Study Sheet”</b>, then choose <i>Save as PDF</i> in your browser’s Print dialog.</p>
+        <p class="muted">You can re-generate a fresh 100-question set anytime.</p>
+      </div>
+
+      <div id="quiz" class="grid qs" style="margin-top:14px"></div>
+
+      <div id="results" class="card hidden" style="margin-top:14px">
+        <h2 style="margin:.2rem 0 0">Your Score</h2>
+        <p>
+          <span class="score" id="score"></span>
+          <span class="muted" id="score-note"></span>
+        </p>
+        <details id="missed-box">
+          <summary><b>Missed or Skipped Terms</b></summary>
+          <div id="missed-list" class="grid" style="margin-top:10px"></div>
+        </details>
+      </div>
+
+      <div class="footer">© You • Quiz runs fully in your browser—no external libraries.</div>
+    </section>
+  </main>
+
+<script>
+/* =======================
+   1) VOCAB “TERMS DB”
+   -----------------------
+   Each item = {term, def, tag}
+   Keep defs short & precise.
+   ======================= */
+const TERMS = [
+  // Session 1–2: basics, pandas, viz
+  {term:"DataFrame", def:"2D labeled table of rows and columns in pandas.", tag:"pandas"},
+  {term:"Series", def:"1D labeled array in pandas (a single column).", tag:"pandas"},
+  {term:"Index", def:"Row labels used to align/join data in pandas.", tag:"pandas"},
+  {term:"GroupBy", def:"Split–apply–combine operation for grouped aggregation.", tag:"pandas"},
+  {term:"join/merge", def:"Combine tables by key columns.", tag:"pandas"},
+  {term:"concat", def:"Stack tables vertically or side-by-side by position.", tag:"pandas"},
+  {term:"tidy data", def:"One row per observation, one column per variable.", tag:"eda"},
+  {term:"NA/NaN", def:"Missing numeric value marker.", tag:"eda"},
+  {term:"dtype", def:"Column data type information.", tag:"pandas"},
+  {term:"vectorization", def:"Operating on whole arrays/columns at once.", tag:"numpy"},
+  {term:"Matplotlib", def:"Low-level Python plotting library.", tag:"viz"},
+  {term:"Seaborn", def:"Statistical plotting on top of Matplotlib.", tag:"viz"},
+  {term:"Plotly", def:"Interactive plotting library.", tag:"viz"},
+  {term:"boxplot", def:"Shows median, quartiles, and outliers.", tag:"viz"},
+  {term:"violin plot", def:"Distribution shape + boxplot info together.", tag:"viz"},
+  {term:"scatterplot", def:"Plots relationship between two numeric variables.", tag:"viz"},
+  {term:"facet", def:"Small multiples—repeat a plot for each group.", tag:"viz"},
+  {term:"hue", def:"Color-encode a categorical variable.", tag:"viz"},
+  {term:"KDE", def:"Smoothed density estimate of a distribution.", tag:"eda"},
+  {term:"IQR", def:"Interquartile range = Q3 − Q1.", tag:"eda"},
+  // Session 3: regression basics
+  {term:"Linear regression", def:"Models a linear relationship between features and target.", tag:"reg"},
+  {term:"Coefficient (β)", def:"Change in target for one-unit change in a feature.", tag:"reg"},
+  {term:"Intercept", def:"Predicted target when all features are 0.", tag:"reg"},
+  {term:"R²", def:"Proportion of variance in target explained by model.", tag:"reg"},
+  {term:"Adjusted R²", def:"R² penalized for extra features.", tag:"reg"},
+  {term:"Residual", def:"Actual − predicted error for an observation.", tag:"reg"},
+  {term:"Homoscedasticity", def:"Residual variance stays roughly constant.", tag:"reg"},
+  {term:"Heteroscedasticity", def:"Residual variance changes with predictions.", tag:"reg"},
+  {term:"Normality of residuals", def:"Residuals are approximately normally distributed.", tag:"reg"},
+  {term:"QQ plot", def:"Compares residual quantiles to a normal distribution.", tag:"reg"},
+  {term:"RMSE", def:"Root mean squared error; typical prediction error size.", tag:"eval"},
+  {term:"MAE", def:"Mean absolute error; average absolute prediction error.", tag:"eval"},
+  {term:"MSE", def:"Mean squared error.", tag:"eval"},
+  {term:"Train/test split", def:"Hold out data to evaluate generalization.", tag:"eval"},
+  {term:"Overfitting", def:"Model memorizes noise; poor generalization.", tag:"eval"},
+  {term:"Underfitting", def:"Model too simple; misses patterns.", tag:"eval"},
+  // Session 4: multiple regression, dummies
+  {term:"Multiple regression", def:"Linear model with multiple features.", tag:"reg"},
+  {term:"Dummy variable", def:"0/1 indicator for a category.", tag:"reg"},
+  {term:"Reference category", def:"Baseline group omitted when creating dummies.", tag:"reg"},
+  {term:"One-hot encoding", def:"Create a dummy column for each category.", tag:"reg"},
+  {term:"Interaction term", def:"Feature representing product of two variables.", tag:"reg"},
+  {term:"Multicollinearity", def:"Features are highly correlated with each other.", tag:"reg"},
+  {term:"VIF", def:"Variance Inflation Factor—multicollinearity diagnostic.", tag:"reg"},
+  {term:"Standardization", def:"Scale to zero-mean/unit-variance.", tag:"prep"},
+  {term:"Normalization", def:"Rescale values to a fixed range like 0–1.", tag:"prep"},
+  {term:"OLS", def:"Ordinary Least Squares; fits by minimizing squared residuals.", tag:"reg"},
+  {term:"Leverage", def:"How far an observation’s features are from the mean.", tag:"reg"},
+  {term:"Influence", def:"Observation with both leverage and large residual.", tag:"reg"},
+  {term:"Cook’s distance", def:"Influence measure on regression fit.", tag:"reg"},
+  // Session 5: diagnostics & fixes
+  {term:"Breusch–Pagan test", def:"Statistical test for heteroscedasticity.", tag:"reg"},
+  {term:"Robust regression", def:"Regression that reduces influence of outliers.", tag:"reg"},
+  {term:"Log transform (target)", def:"Stabilizes variance; turns multiplicative effects additive.", tag:"reg"},
+  {term:"Box–Cox", def:"Power transform to improve normality/variance stability.", tag:"reg"},
+  {term:"Standardized coefficient", def:"Coefficient after features are standardized.", tag:"reg"},
+  {term:"Prediction", def:"Model’s estimated target for given features.", tag:"eval"},
+  {term:"Cross-validation", def:"Repeated train/test splits to average performance.", tag:"eval"},
+  {term:"Bias–variance tradeoff", def:"Balance under/overfitting to generalize well.", tag:"eval"},
+  // EDA extras + workflow
+  {term:"Outlier", def:"Data point far from most others.", tag:"eda"},
+  {term:"Skewness", def:"Asymmetry of a distribution.", tag:"eda"},
+  {term:"Correlation", def:"Linear association between two variables.", tag:"eda"},
+  {term:"Pearson r", def:"Correlation coefficient for linear relationships.", tag:"eda"},
+  {term:"Spearman rho", def:"Rank-based correlation coefficient.", tag:"eda"},
+  {term:"Confounder", def:"Variable related to both feature and target that can bias results.", tag:"causal"},
+  {term:"Simpson’s paradox", def:"Trend reverses when groups are combined vs separated.", tag:"causal"},
+  {term:"Baseline model", def:"Simple model to compare improvements against.", tag:"eval"},
+  {term:"Seed (random_state)", def:"Fixed randomness to reproduce results.", tag:"repro"},
+  {term:"Feature", def:"Input variable to a model.", tag:"core"},
+  {term:"Target", def:"Outcome variable the model predicts.", tag:"core"},
+  {term:"Design matrix", def:"Matrix of features used by a model.", tag:"core"},
+  {term:"Regularization", def:"Add penalty to discourage overly complex models.", tag:"reg"},
+  {term:"Ridge", def:"L2-penalized linear regression.", tag:"reg"},
+  {term:"Lasso", def:"L1-penalized linear regression (can set coefficients to zero).", tag:"reg"},
+  {term:"Standard error", def:"Estimated uncertainty of a statistic/coef.", tag:"stat"},
+  {term:"Confidence interval", def:"Range likely to contain true value.", tag:"stat"},
+  {term:"p-value", def:"Evidence against a null hypothesis.", tag:"stat"},
+  {term:"Null hypothesis", def:"Default claim (e.g., no effect) to test against.", tag:"stat"},
+  {term:"Alternative hypothesis", def:"Claim of an effect/difference.", tag:"stat"},
+  {term:"Collinearity threshold", def:"Practical rule like VIF > 10 indicates trouble.", tag:"reg"},
+  {term:"Train error", def:"Error measured on data used for fitting.", tag:"eval"},
+  {term:"Test error", def:"Error on held-out data; estimates generalization.", tag:"eval"},
+  {term:"Over-parameterization", def:"Too many features for the data size.", tag:"reg"},
+  {term:"Feature scaling", def:"Make units comparable for certain models.", tag:"prep"},
+  {term:"Standard normal", def:"Normal distribution with mean 0, sd 1.", tag:"stat"},
+  {term:"Homoskedastic errors", def:"Same as homoscedastic residuals.", tag:"reg"},
+  {term:"Endogeneity", def:"Feature correlated with the error term.", tag:"reg"},
+  {term:"Variance", def:"Average squared deviation from the mean.", tag:"stat"}
+];
+
+// Quick distractor picker from other defs
+function distractors(correctDef, k=2){
+  const pool = TERMS.filter(t=>t.def!==correctDef).map(t=>t.def);
+  const picks = new Set();
+  while(picks.size<k){
+    const d = pool[Math.floor(Math.random()*pool.length)];
+    picks.add(d);
+  }
+  return [...picks];
+}
+
+// Create 100 questions by sampling terms (with replacement) and building 3 options.
+function generateQuestions(n=100){
+  const Q = [];
+  for(let i=0;i<n;i++){
+    const t = TERMS[Math.floor(Math.random()*TERMS.length)];
+    const variants = [
+      `Which definition best matches the term **${t.term}**?`,
+      `Choose the correct description of **${t.term}**.`,
+      `What is **${t.term}**?`,
+      `Best definition of **${t.term}**:`
+    ];
+    const stem = variants[Math.floor(Math.random()*variants.length)];
+    const wrongs = distractors(t.def, 2);
+    const opts = [t.def, ...wrongs].sort(()=>Math.random()-.5);
+    const answer = opts.indexOf(t.def);
+    Q.push({term:t.term, tag:t.tag, stem, opts, answer, correctDef:t.def});
+  }
+  return Q;
+}
+
+// Render quiz UI
+function renderQuiz(Q){
+  const wrap = document.getElementById('quiz');
+  wrap.innerHTML = "";
+  Q.forEach((q, idx)=>{
+    const card = document.createElement('div');
+    card.className = 'card q';
+    const head = document.createElement('h3');
+    head.innerHTML = `<span class="muted right">#${idx+1}</span>${q.stem}<div class="tags"><span class="pill">${q.tag}</span><span class="pill">${q.term}</span></div>`;
+    card.appendChild(head);
+    q.opts.forEach((opt, oi)=>{
+      const row = document.createElement('div'); row.className='opt';
+      const id = `q${idx}_o${oi}`;
+      row.innerHTML = `
+        <input type="radio" id="${id}" name="q${idx}" value="${oi}">
+        <label for="${id}">${opt}</label>
+      `;
+      card.appendChild(row);
+    });
+    wrap.appendChild(card);
+  });
+}
+
+// Grade quiz + build missed set
+function gradeQuiz(Q){
+  let correct=0, total=Q.length;
+  const missed = [];
+  Q.forEach((q, idx)=>{
+    const sel = document.querySelector(`input[name="q${idx}"]:checked`);
+    const chosen = sel ? parseInt(sel.value,10) : null;
+    // add visual feedback
+    const opts = [...document.querySelectorAll(`input[name="q${idx}"]`)];
+    opts.forEach((inp, i)=>{
+      inp.parentElement.classList.remove('correct','incorrect');
+      if(sel && i===chosen){
+        inp.parentElement.classList.add(i===q.answer?'correct':'incorrect');
+      }
+    });
+    if(chosen===q.answer){ correct++; }
+    else{
+      missed.push({
+        term:q.term, tag:q.tag, correct:q.correctDef,
+        chosen: chosen==null ? "(no answer)" : q.opts[chosen]
+      });
+    }
+  });
+  const scorePct = Math.round(100*correct/total);
+  document.getElementById('results').classList.remove('hidden');
+  document.getElementById('score').textContent = `${correct} / ${total}  (${scorePct}%)`;
+  document.getElementById('score-note').textContent =
+    scorePct>=90? "Excellent!" :
+    scorePct>=75? "Nice work—review misses." :
+    "Focus on the study sheet and retry.";
+  // list missed
+  const box = document.getElementById('missed-list');
+  box.innerHTML = missed.length? "" : "<p>🎉 No missed terms!</p>";
+  missed.forEach(m=>{
+    const div = document.createElement('div');
+    div.className='card';
+    div.innerHTML = `<b>${m.term}</b> <span class="pill">${m.tag}</span><br>
+      <span class="muted">Correct:</span> ${m.correct}<br>
+      <span class="muted">You chose:</span> ${m.chosen}`;
+    box.appendChild(div);
+  });
+  return {scorePct, missed};
+}
+
+// Printable study sheet
+function openStudySheet(missed, scorePct){
+  const win = window.open('', '_blank');
+  const when = new Date().toLocaleString();
+  const css = `
+    body{font:15px/1.45 system-ui,Segoe UI,Roboto,Inter,Arial;margin:32px}
+    h1{margin:0 0 6px} .muted{color:#555}
+    .tag{display:inline-block;border:1px solid #bbb;padding:1px 8px;border-radius:999px;margin-left:8px;font-size:.85rem}
+    .card{border:1px solid #ddd;border-radius:10px;padding:12px;margin:10px 0;background:#fff}
+    @media print{ .no-print{display:none} }
+  `;
+  const items = missed.map(m=>`
+    <div class="card">
+      <b>${m.term}</b><span class="tag">${m.tag}</span>
+      <div><span class="muted">Definition:</span> ${m.correct}</div>
+    </div>`).join('') || "<p>🎉 You didn’t miss any terms. Great job!</p>";
+
+  win.document.write(`
+    <html><head><meta charset="utf-8"><title>Study Sheet — Sessions 1–5</title>
+    <style>${css}</style></head>
+    <body>
+      <button class="no-print" onclick="window.print()">🖨️ Print / Save as PDF</button>
+      <h1>Study Sheet — Sessions 1–5</h1>
+      <div class="muted">Generated: ${when} • Score: ${scorePct}%</div>
+      <hr>
+      ${items}
+    </body></html>
+  `);
+  win.document.close();
+}
+
+/* =======================
+   2) WIRE UP CONTROLS
+   ======================= */
+let QUESTIONS = [];
+
+const btnGen = document.getElementById('btn-generate');
+const btnGrade = document.getElementById('btn-grade');
+const btnReview = document.getElementById('btn-review');
+const btnClear = document.getElementById('btn-clear');
+
+btnGen.addEventListener('click', ()=>{
+  QUESTIONS = generateQuestions(100);
+  renderQuiz(QUESTIONS);
+  document.getElementById('results').classList.add('hidden');
+  btnGrade.disabled = false;
+  btnReview.disabled = true;
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+let lastMissed = [], lastScore = 0;
+
+btnGrade.addEventListener('click', ()=>{
+  const {missed, scorePct} = gradeQuiz(QUESTIONS);
+  lastMissed = missed; lastScore = scorePct;
+  btnReview.disabled = false;
+  document.getElementById('results').scrollIntoView({behavior:'smooth'});
+});
+
+btnReview.addEventListener('click', ()=>{
+  openStudySheet(lastMissed, lastScore);
+});
+
+btnClear.addEventListener('click', ()=>{
+  document.querySelectorAll('input[type=radio]').forEach(r=> r.checked=false);
+  document.querySelectorAll('.correct,.incorrect').forEach(n=>n.classList.remove('correct','incorrect'));
+  document.getElementById('results').classList.add('hidden');
+});
+
+// Auto-generate on first load for convenience
+btnGen.click();
+</script>
+</body>
+</html>
