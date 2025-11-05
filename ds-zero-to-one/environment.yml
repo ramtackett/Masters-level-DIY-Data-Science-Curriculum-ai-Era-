@@ -2,7 +2,7 @@ name: ds
 channels:
   - conda-forge
 dependencies:
-  - python=3.13.5
+  - python=3.13
   - numpy
   - pandas
   - matplotlib
@@ -15,3 +15,4 @@ dependencies:
   - pip
   - pip:
       - polars
+  - linearmodels
