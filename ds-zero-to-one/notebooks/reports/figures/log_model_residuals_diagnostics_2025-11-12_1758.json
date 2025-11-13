@@ -1,0 +1,57 @@
+{
+  "created_at": "2025-11-12T17:58:14",
+  "image_file": "reports/figures/log_model_residuals_diagnostics_2025-11-12_1758.png",
+  "chart_type": "diagnostic",
+  "library": "matplotlib",
+  "mapping": {
+    "x": "fittedvalues",
+    "y": "resid",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_synthetic",
+    "dataset_path": "data/processed/tips_synthetic.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        250,
+        6
+      ],
+      "columns": [
+        "bill_total_usd",
+        "party_size",
+        "tip_usd",
+        "predicted",
+        "residuals",
+        "log_tip"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "party_size": "int64",
+        "tip_usd": "float64",
+        "predicted": "float64",
+        "residuals": "float64",
+        "log_tip": "float64"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one/notebooks"
+  },
+  "source": {
+    "notebook": "notebooks/06_Model_Robustness_Assumption_Checks.ipynb"
+  },
+  "vcs": {
+    "git_commit": "6db49001b2e3b20c817dad59e076b8690ce163b1",
+    "git_branch": "main"
+  },
+  "notes": "Log-transformed OLS residuals diagnostic plot."
+}
