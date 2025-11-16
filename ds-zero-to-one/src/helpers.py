@@ -228,3 +228,29 @@ def show_diff(cell_a: str, cell_b: str, name_a="Cell A", name_b="Cell B", color=
             cell_a.splitlines(), cell_b.splitlines(), fromdesc=name_a, todesc=name_b
         )
         display(HTML(diff_html))
+
+# --- 1. Import libraries ---
+import os
+import sys
+import duckdb
+import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
+
+def setProjRoot(): 
+    # Manually define the correct project root path based on your previous output
+    CORRECT_PROJECT_ROOT = "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+    
+    # Set CWD
+    try:
+        os.chdir(CORRECT_PROJECT_ROOT)
+        print(f"✅ CWD successfully set to: {os.getcwd()}")
+    
+        # Add to sys.path for module imports (src.helpers)
+        if CORRECT_PROJECT_ROOT not in sys.path:
+            sys.path.append(CORRECT_PROJECT_ROOT)
+            print("✅ Added project root to sys.path.")
+    
+    except FileNotFoundError:
+        print("❌ CRITICAL ERROR: The manually defined project path does not exist.")
+        sys.exit(1)
