@@ -1,0 +1,61 @@
+{
+  "created_at": "2025-11-15T11:27:41",
+  "image_file": "reports/figures/vif_traffic_light_2025-11-15_1127.png",
+  "chart_type": "barh",
+  "library": "matplotlib",
+  "mapping": {
+    "x": "VIF",
+    "y": "Feature",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_cleaned",
+    "dataset_path": "data/processed/tips_cleaned.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        244,
+        8
+      ],
+      "columns": [
+        "bill_total_usd",
+        "tip_usd",
+        "day",
+        "time",
+        "party_size",
+        "tip_pct",
+        "gender_Male",
+        "is_smoker_Yes"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "tip_usd": "float64",
+        "day": "object",
+        "time": "object",
+        "party_size": "int64",
+        "tip_pct": "float64",
+        "gender_Male": "bool",
+        "is_smoker_Yes": "bool"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/07_Regularization_and_Overfitting.ipynb"
+  },
+  "vcs": {
+    "git_commit": "dc5a2480ef4588f071c45fd20a9d3a6b3359f57e",
+    "git_branch": "main"
+  },
+  "notes": "VIF diagnostics with traffic-light chart"
+}
