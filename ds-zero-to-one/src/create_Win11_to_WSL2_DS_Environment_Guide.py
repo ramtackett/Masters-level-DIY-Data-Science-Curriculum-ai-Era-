@@ -158,6 +158,7 @@ story.append(Preformatted(
     'git config --global user.name "Your Name"\n'
     'git config --global user.email "12345678+yourusername@users.noreply.github.com"\n'
     'git config --global init.defaultBranch main\n',
+    'git remote set-url origin git@github.com:GIT_USERNAME/REPO_NAME.git\n',
     code_style,
 ))
 story.append(PageBreak())
