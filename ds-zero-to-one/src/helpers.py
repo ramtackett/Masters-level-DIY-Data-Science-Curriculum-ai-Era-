@@ -237,7 +237,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.express as px
 
-def setProjRoot(): 
+#TODO: fix this
+def setProjRoot(): #Doesn't work ... 
     # Manually define the correct project root path based on your previous output
     CORRECT_PROJECT_ROOT = "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
     
@@ -254,3 +255,19 @@ def setProjRoot():
     except FileNotFoundError:
         print("❌ CRITICAL ERROR: The manually defined project path does not exist.")
         sys.exit(1)
+
+
+def calculate_vif(df, features):
+    from statsmodels.stats.outliers_influence import variance_inflation_factor
+    from statsmodels.tools.tools import add_constant
+
+    X = df[features].copy()
+    X = add_constant(X)
+
+    vif_df = pd.DataFrame({
+        "Feature": X.columns,
+        "VIF": [variance_inflation_factor(X.values, i)
+                for i in range(X.shape[1])]
+    })
+
+    return vif_df[vif_df["Feature"] != "const"]

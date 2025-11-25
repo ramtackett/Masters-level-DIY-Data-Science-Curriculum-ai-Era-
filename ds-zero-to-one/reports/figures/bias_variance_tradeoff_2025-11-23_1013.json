@@ -1,0 +1,36 @@
+{
+  "created_at": "2025-11-23T10:13:01",
+  "image_file": "reports/figures/bias_variance_tradeoff_2025-11-23_1013.png",
+  "chart_type": "line",
+  "library": "matplotlib",
+  "mapping": {
+    "x": "model_complexity",
+    "y": "error_components",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "synthetic_bias_variance_demo",
+    "dataset_path": null,
+    "filters": {},
+    "frame_summary": null
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/07C_RegularizationOverfittingandModelStability.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ccbb7a83a702873c1d6209e76337d71bc61a801e",
+    "git_branch": "main"
+  },
+  "notes": "Conceptual bias\u2013variance tradeoff for regularization."
+}
