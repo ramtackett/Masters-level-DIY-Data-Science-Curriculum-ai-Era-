@@ -1,0 +1,57 @@
+{
+  "created_at": "2025-11-25T19:58:37",
+  "image_file": "reports/figures/ridge_coefficient_paths_2025-11-25_1958.png",
+  "chart_type": "line",
+  "library": "matplotlib",
+  "mapping": {
+    "x": "alpha",
+    "y": "coefficient",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_synthetic",
+    "dataset_path": "data/processed/tips_synthetic.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        400,
+        6
+      ],
+      "columns": [
+        "bill_total_usd",
+        "party_size",
+        "tip_usd",
+        "tip_pct",
+        "gender_Male",
+        "is_smoker_Yes"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "party_size": "int64",
+        "tip_usd": "float64",
+        "tip_pct": "float64",
+        "gender_Male": "bool",
+        "is_smoker_Yes": "bool"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/07C_RegularizationOverfittingandModelStability.ipynb"
+  },
+  "vcs": {
+    "git_commit": "a7be47f6ccacd0e007b9a589261c71baeee1a926",
+    "git_branch": "main"
+  },
+  "notes": "Ridge coefficient paths: how coefficients shrink as alpha increases."
+}
