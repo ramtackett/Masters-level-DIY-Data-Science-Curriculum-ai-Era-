@@ -1,0 +1,53 @@
+{
+  "created_at": "2025-11-27T17:44:26",
+  "image_file": "reports/figures/gam_smooths_tip_usd_2025-11-27_1744.png",
+  "chart_type": "gam_smooths",
+  "library": "matplotlib + pygam",
+  "mapping": {
+    "x": "(multiple features)",
+    "y": "tip_usd",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_synthetic",
+    "dataset_path": "data/processed/tips_synthetic.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        400,
+        4
+      ],
+      "columns": [
+        "bill_total_usd",
+        "party_size",
+        "gender_Male",
+        "is_smoker_Yes"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "party_size": "int64",
+        "gender_Male": "bool",
+        "is_smoker_Yes": "bool"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/08_Nonlinearity_and_GAMs.ipynb"
+  },
+  "vcs": {
+    "git_commit": "ea0b36fbb67b5b0f3cdd2bc4ee7604b76a30129c",
+    "git_branch": "main"
+  },
+  "notes": "GAM partial dependence plots for bill, party size, gender, smoker."
+}
