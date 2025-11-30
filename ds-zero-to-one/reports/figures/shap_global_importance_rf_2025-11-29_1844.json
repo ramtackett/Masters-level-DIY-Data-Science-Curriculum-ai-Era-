@@ -1,0 +1,57 @@
+{
+  "created_at": "2025-11-29T18:44:21",
+  "image_file": "reports/figures/shap_global_importance_rf_2025-11-29_1844.png",
+  "chart_type": "bar",
+  "library": "shap+matplotlib",
+  "mapping": {
+    "x": "feature",
+    "y": "mean_abs_shap",
+    "color": null,
+    "hue": null,
+    "group": null
+  },
+  "modeling": {
+    "trendline": null
+  },
+  "data": {
+    "dataset_name": "tips_synthetic",
+    "dataset_path": "data/processed/tips_synthetic.csv",
+    "filters": {},
+    "frame_summary": {
+      "shape": [
+        400,
+        6
+      ],
+      "columns": [
+        "bill_total_usd",
+        "party_size",
+        "tip_usd",
+        "tip_pct",
+        "gender_Male",
+        "is_smoker_Yes"
+      ],
+      "dtypes": {
+        "bill_total_usd": "float64",
+        "party_size": "int64",
+        "tip_usd": "float64",
+        "tip_pct": "float64",
+        "gender_Male": "bool",
+        "is_smoker_Yes": "bool"
+      }
+    }
+  },
+  "execution_env": {
+    "python": "3.13.5",
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.39",
+    "conda_prefix": "/home/rtackett/miniconda3/envs/ds",
+    "working_dir": "/home/rtackett/projects/Masters-level-DIY-Data-Science-Curriculum-ai-Era-/ds-zero-to-one"
+  },
+  "source": {
+    "notebook": "notebooks/08B_SHAP_Interpretability.ipynb"
+  },
+  "vcs": {
+    "git_commit": "a9ead900559542f336401b6fcbe56cb2c95874f5",
+    "git_branch": "main"
+  },
+  "notes": "SHAP global feature importance for RandomForestRegressor on tip_usd."
+}
